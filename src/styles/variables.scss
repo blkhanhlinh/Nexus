@@ -1,0 +1,59 @@
+// Text colors
+$text-main: #F3F3F3;
+$text-dim: #76808C;
+
+// System blue greys
+$system-lightest-grey: #DCDEDF;
+$system-lighter-grey: #B8BCBF;
+$system-light-grey: #8B929A;
+$system-grey: #67707B;
+$system-dark-grey: #3D4450;
+$system-darker-grey: #23262E;
+$system-darkest-grey: #0E141B;
+
+// Store blue greys
+$store-lightest-grey: #CCD8E3;
+$store-lighter-grey: #A7BACC;
+$store-light-grey: #7C8EA3;
+$store-grey: #4e697d;
+$store-dark-grey: #2A475E;
+$store-darker-grey: #1B2838;
+$store-darkest-grey: #000F18;
+
+// Gradients
+$gradient-store-background: linear-gradient(180deg, #040011 13.77%, #202B3C 27.29%, #202B3C 27.29%);
+$gradient-library-background: radial-gradient(farthest-corner at 40px 40px, #3D4450 0%, #23262E 80%);
+$gradient-primary-background: radial-gradient(76.88% 68.46% at 50% 0%, #212B45 2.61%, #111822 72.64%, #0F151E 87.22%, #0E141B 100%);
+
+// Colours
+$color-blue: #1A9FFF;
+$color-blue-hi: #00BBFF;
+$color-green: #5ba32b;
+$color-green-hi: #59BF40;
+$color-orange: #E35E1C;
+$color-red: #D94126;
+$color-red-hi: #EE563B;
+$color-dusty-blue: #417a9b;
+$color-light-blue: #B3DFFF;
+$color-yellow: #FFC82C;
+$color-primary: #66C0F4;
+$color-secondary: #4B619B;
+
+// Backgrounds
+$bg-main: #0e141b;
+$bg-light: #1E2329;
+$bg-hover: #313843;
+$bg-secondary: #14344B;
+$bg-tertiary: #212B45;
+$background-neutral-light-softer: rgba(235, 246, 255, 0.10);
+$background-neutral-light-soft: rgba(235, 246, 255, 0.20);
+$background-neutral-light-medium: rgba(235, 246, 255, 0.30);
+$background-neutral-light-hard: rgba(235, 246, 255, 0.40);
+$background-neutral-light-harder: rgba(235, 246, 255, 0.50);
+
+// Accent
+$accent-green: #A1CD44;
+$accent-red: #CD5444;
+$accent-yellow: #C1B15F;
+
+$header-height: 52px;
