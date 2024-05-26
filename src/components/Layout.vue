@@ -1,6 +1,6 @@
 <template>
     <Navbar :show-subnav="!isLogin" />
-    <main v-bind="$attrs">
+    <main v-bind="$attrs" class="mt-[105px]">
         <div :class="
             isLogin || isFull ? '' : 'container mx-auto pb-20 px-2'
         ">
