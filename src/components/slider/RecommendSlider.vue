@@ -48,7 +48,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, defineProps } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";

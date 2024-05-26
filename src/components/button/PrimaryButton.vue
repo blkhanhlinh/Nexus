@@ -12,7 +12,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
 import { useCartStore } from "@/stores";
 import axios from "axios";
 import { Game } from "@/interfaces/Product";

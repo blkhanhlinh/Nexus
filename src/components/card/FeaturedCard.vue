@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, ref, computed } from "vue";
+import { ref, computed } from "vue";
 import MainCta from "@/components/button/MainCta.vue";
 import { RouterLink } from "vue-router";
 import { Game } from "@/interfaces/Product";

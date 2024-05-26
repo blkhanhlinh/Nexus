@@ -40,7 +40,7 @@
           </div>
           <div class="flex justify-between items-center mt-4">
             <icon-button type="text" name="Wishlist" icon-src="/src/assets/icons/heart.svg" ></icon-button>
-            <main-cta :price="game.price"></main-cta>
+            <main-cta :game-id="game.gameId" :price="game.price"></main-cta>
           </div>
         </div>
       </div>
@@ -49,11 +49,10 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps } from "vue";
-import MainCta from "@/components/button/MainCta.vue";
 import { RouterLink } from "vue-router";
 import { Game } from "@/interfaces/Product";
 import IconButton from "../button/IconButton.vue";
+import MainCta from "@/components/button/MainCta.vue";
 
 const props = defineProps<{
   game: Game;
