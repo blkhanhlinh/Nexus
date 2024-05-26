@@ -18,8 +18,13 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* other configs */
+    "paths": {
+      "@/*": ["./src/*"]
+    },
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "./.dot/**/*.vue", "./dot/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

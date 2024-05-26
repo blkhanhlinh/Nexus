@@ -11,6 +11,7 @@
   "dependencies": {
     "@headlessui/vue": "^1.7.22",
     "axios": "^1.6.8",
+    "gsap": "^3.12.5",
     "pinia": "^2.1.7",
     "swiper": "^11.1.1",
     "vee-validate": "^4.12.8",
