@@ -186,6 +186,9 @@
         </div>
       </div>
     </div>
+    <div v-else class="h-screen container flex items-center justify-center">
+      <loader></loader>
+    </div>
   </layout>
 </template>
 
@@ -213,6 +216,7 @@ import "swiper/css/thumbs";
 import "swiper/css/pagination";
 import RecommendSlider from "@/components/slider/RecommendSlider.vue";
 import { gsap } from "gsap";
+import Loader from "@/components/Loader.vue";
 
 const route = useRoute();
 const gameID = ref(route.params.id as string);

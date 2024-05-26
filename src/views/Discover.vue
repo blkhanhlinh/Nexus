@@ -4,7 +4,7 @@
       <div v-if="checkAuth">
         <div
           v-if="loading"
-          class="h-screen w-full flex justify-center items-center"
+          class="h-screen container flex justify-center items-center"
         >
           <loader />
         </div>
