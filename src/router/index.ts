@@ -1,8 +1,4 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import { useAlertStore } from '@/stores/alert.store';
-import { useAuthStore } from '@/stores/auth.store';
-import { userAPI } from '@/constants/api';
-import { useChatStore } from '@/stores/chat.store';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -35,14 +31,6 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/Chatbot.vue'),
     meta: {
       PageTitle: `Chatbot`
-    },
-    beforeEnter: async (to, from, next) => {
-      const authStore = useAuthStore();
-      const chatStore = useChatStore();
-      if (authStore.isAuthenticated) {
-        await chatStore.getHistory();
-      }
-      next();
     },
   },
   {
