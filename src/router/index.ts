@@ -55,14 +55,14 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/GameDetails.vue'),
     props: true,
   },
-  {
-    path: '/wishlist',
-    name: 'Wishlist',
-    component: () => import('../views/Wishlist.vue'),
-    meta: {
-      PageTitle: `Wishlist`
-    }
-  },
+  // {
+  //   path: '/wishlist',
+  //   name: 'Wishlist',
+  //   component: () => import('../views/Wishlist.vue'),
+  //   meta: {
+  //     PageTitle: `Wishlist`
+  //   }
+  // },
   {
     path: '/cart',
     name: 'Cart',
