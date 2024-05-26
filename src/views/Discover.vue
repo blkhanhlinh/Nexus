@@ -54,7 +54,7 @@
         class="discover-block flex flex-col gap-4 items-center justify-center"
       >
         <loader></loader>
-        <p class="text-2xl">Please log in to see your feed.</p>
+        <p class="text-2xl">Please log in to see your feed</p>
         <router-link to="/login">
           <button class="bg-secondary text-white py-4 px-5 rounded text-lg">
             Login

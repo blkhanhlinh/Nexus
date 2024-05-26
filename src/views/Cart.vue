@@ -1,6 +1,6 @@
 <template>
   <layout>
-    <div class="container mx-auto mt-12 mb-20">
+    <div v-if="authStore.isAuthenticated" class="container mx-auto mt-12 mb-20">
       <h1 class="text-2xl font-bold mb-6 capitalize">
         {{ authStore.user?.username }}'s Shopping Cart
       </h1>
@@ -94,6 +94,18 @@
         >
       </div>
     </div>
+    <div
+        v-else
+        class="cart-block flex flex-col gap-4 items-center justify-center"
+      >
+        <loader></loader>
+        <p class="text-2xl">Please log in to purchase item</p>
+        <router-link to="/login">
+          <button class="bg-secondary text-white py-4 px-5 rounded text-lg">
+            Login
+          </button>
+        </router-link>
+      </div>
   </layout>
 </template>
 
@@ -161,4 +173,8 @@ onMounted(() => {
 });
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.cart-block {
+  height: calc(100vh - 105px)
+}
+</style>

@@ -273,6 +273,7 @@ const fetchRecommendGames = async (id: string) => {
 };
 
 onMounted(async () => {
+  gsap.to(window, { scrollTo: { y: 0 }, duration: 1, ease: "power2.inOut" });
   await fetchGameDetails(gameID.value);
 });onMounted(async () => {
   try {
