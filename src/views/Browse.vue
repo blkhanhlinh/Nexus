@@ -27,9 +27,9 @@
               @selectCategory="handleCategorySelect"
             ></category-slider>
           </div>
-          <div class="flex flex-col">
+          <div ref="browseContainer" class="flex flex-col">
             <h1 class="text-2xl font-bold mb-6">Browse Nexus</h1>
-            <div ref="browseContainer" class="browse__container grid">
+            <div class="browse__container grid">
               <div
                 class="browse__header grid col-span-2 bg-bg-main p-4 rounded-lg"
               >
@@ -364,7 +364,6 @@ const filterGames = async () => {
         ? selectedFilters.value.price[0].split(" - ")[1].replace("$", "")
         : undefined,
   };
-  console.log(searchParams);
   games.value = (await gameStore.searchGame(searchParams)) || [];
 };
 
@@ -412,6 +411,7 @@ const paginatedGames = computed(() => {
 const handlePageChange = (page: number) => {
   if (page > 0 && page <= totalPages.value) {
     currentPage.value = page;
+    browseContainer.value?.scrollIntoView({ behavior: "smooth" });
   }
 };
 const selectedTags = computed(() => {

@@ -32,6 +32,7 @@
           class="bg-bg-main rounded-lg p-4 w-full flex flex-col gap-5 justify-between"
         >
           <img
+            loading="lazy"
             :src="item.image"
             :alt="item.gameName"
             class="w-full h-60 object-cover"
