@@ -1,17 +1,17 @@
 <template>
   <Navbar />
   <main class="bg-bg-main w-full h-full pt-[52px]">
-    <div class="page container mx-auto py-4 flex flex-col justify-between">
+    <div class="page container mx-auto py-4 flex flex-col gap-1">
       <div
         v-if="isFetchingHistory"
-        class="w-full h-5/6 flex justify-center items-center"
+        class="w-full h-full flex justify-center items-center"
       >
         <loader></loader>
       </div>
       <div
         v-else
         ref="chatContainer"
-        class="chat-container h-5/6 w-full px-4 py-4 overflow-y-auto space-y-2"
+        class="chat-container h-full w-full px-4 py-4 overflow-y-auto space-y-2"
       >
         <div class="flex gap-1">
           <div
