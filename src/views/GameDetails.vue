@@ -8,9 +8,9 @@
           <secondary-button name="Ignore"></secondary-button>
           <secondary-button name="Follow"></secondary-button>
           <icon-button
+            @click.prevent="toggleWishlist"
             type="text"
-            name="Wishlist"
-            icon-src="/src/assets/icons/heart.svg"
+            :btn-style="wishlistIcon"
           ></icon-button>
           <primary-button name="Browse All DLCs"></primary-button>
           <primary-button name="Community Hub"></primary-button>
@@ -222,6 +222,17 @@ const thumbsSwiper = ref<any>(null);
 const showFullPlot = ref<boolean>(false);
 const loading = ref<boolean>(true);
 const games = ref<RecommendCard[]>([]);
+  const isInWishlist = ref(false);
+
+const wishlistIcon = computed(() =>
+  isInWishlist.value
+    ? "fill"
+    : "default"
+);
+
+const toggleWishlist = () => {
+  isInWishlist.value = !isInWishlist.value;
+}
 
 const onSwiper = (swiper: any) => {
   thumbsSwiper.value = swiper;

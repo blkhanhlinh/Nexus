@@ -13,16 +13,18 @@
     <div
       :class="[
         'flex flex-col justify-between w-full',
-        variant === 'rowSlider' ? '' : 'gap-2',
+        variant === 'rowSlider' ? '' : 'gap-4',
       ]"
     >
       <div class="flex justify-between items-center">
         <router-link :to="`/games/${game.gameId}`">
           <h3 class="font-bold text-text-main text-xl">{{ game.title }}</h3>
         </router-link>
-        <button @click.prevent="toggleWishlist">
-          <img :src="wishlistIcon" />
-        </button>
+        <icon-button
+            @click.prevent="toggleWishlist"
+            type="icon"
+            :btn-style="wishlistIcon"
+          ></icon-button>
       </div>
       <div class="flex justify-between items-center">
         <icon-o-s :os="props.game.operatingSystem"></icon-o-s>
@@ -39,6 +41,7 @@ import { ref, computed, onMounted } from "vue";
 import { Game } from "@/interfaces/Product";
 import IconOS from "../common/IconOS.vue";
 import MainCta from "../button/MainCta.vue";
+import IconButton from "../button/IconButton.vue";
 
 const props = defineProps<{
   game: Game;
@@ -70,13 +73,13 @@ const isInWishlist = ref(false);
 
 const wishlistIcon = computed(() =>
   isInWishlist.value
-    ? "src/assets/icons/heart-fill.svg"
-    : "src/assets/icons/heart.svg"
+    ? "fill"
+    : "default"
 );
 
 const toggleWishlist = () => {
   isInWishlist.value = !isInWishlist.value;
-};
+}
 </script>
 
 <style scoped></style>

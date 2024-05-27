@@ -26,17 +26,7 @@
             >
               {{ game.genre }}
             </div>
-            <img
-              v-if="game.operatingSystem == 'Microsoft Windows'"
-              src="@/assets/icons/windows.svg"
-              class="h-6 w-6"
-            />
-            <img
-              v-else-if="game.operatingSystem  == 'macOS'"
-              src="@/assets/icons/apple.svg"
-              class="h-6 w-6"
-            />
-            <img v-else src="@/assets/icons/os.svg" class="h-6 w-6" />
+            <icon-o-s :os="props.game.operatingSystem"></icon-o-s>
           </div>
           <div class="flex justify-between items-center mt-4">
             <icon-button type="text" name="Wishlist" icon-src="/src/assets/icons/heart.svg" ></icon-button>
@@ -53,6 +43,7 @@ import { RouterLink } from "vue-router";
 import { Game } from "@/interfaces/Product";
 import IconButton from "../button/IconButton.vue";
 import MainCta from "@/components/button/MainCta.vue";
+import IconOS from "../common/IconOS.vue";
 
 const props = defineProps<{
   game: Game;
