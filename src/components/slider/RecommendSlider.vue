@@ -38,7 +38,7 @@
             </div>
             <div class="flex justify-between items-center">
               <icon-o-s :os="item.os[0]"></icon-o-s>
-              <main-cta :price="item.price" :gameId="item.gameID"></main-cta>
+              <main-cta :price="item.price" :gameId="item.gameID.toString()"></main-cta>
             </div>
           </div>
         </div>
@@ -69,7 +69,7 @@ const props = defineProps<{
   games: RecommendCard[];
 }>();
 
-const goToGameDetails = (gameID: string) => {
+const goToGameDetails = (gameID: number) => {
   router.push(`/games/${gameID}`).then(() => {
     gsap.to(window, { scrollTo: { y: 0 }, duration: 1, ease: "power2.inOut" });
   });

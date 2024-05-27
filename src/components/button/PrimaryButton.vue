@@ -2,8 +2,9 @@
   <button
     :class="[
       smaller ? 'px-4 py-2' : 'h-[52px] py-4 px-5',
-      'flex rounded justify-center items-center z-50',
-      active ? 'bg-bg-hover' : 'bg-bg-highlight', cart ? 'bg-secondary hover:bg-blue' : 'hover:bg-bg-hover',
+      'flex rounded justify-center items-center z-20',
+      active ? 'bg-bg-hover' : 'bg-bg-highlight', 
+      cart ? 'bg-secondary hover:bg-blue' : 'hover:bg-bg-hover',
     ]"
     @click="handleClick"
   >
@@ -12,10 +13,11 @@
 </template>
 
 <script setup lang="ts">
-import { useCartStore } from "@/stores";
+import { useCartStore, useAuthStore, useAlertStore } from "@/stores";
 import axios from "axios";
 import { Game } from "@/interfaces/Product";
 import { baseURL } from "@/constants/api";
+import { useRouter } from 'vue-router';
 
 const props = defineProps<{
   cart?: boolean;
@@ -25,7 +27,11 @@ const props = defineProps<{
   active?: boolean;
 }>();
 
+const emit = defineEmits(['addToCart']);
+const router = useRouter();
 const cartStore = useCartStore();
+const authStore = useAuthStore();
+const alertStore = useAlertStore();
 
 const fetchGameDetails = async (id: string): Promise<Game | null> => {
   try {
@@ -39,6 +45,11 @@ const fetchGameDetails = async (id: string): Promise<Game | null> => {
 
 const handleClick = async () => {
   if (props.cart && props.gameId) {
+    if (!authStore.isAuthenticated) {
+      alertStore.error("You should first login to purchase item 👾");
+      router.push('/login');
+      return;
+    }
     const game = await fetchGameDetails(props.gameId);
     if (game) {
       const gameInfo = {
@@ -49,7 +60,8 @@ const handleClick = async () => {
         image: game.url[0],
       };
       cartStore.addToCart(gameInfo);
-      console.log(cartStore.items)
+      alertStore.success("Add item to cart successfully 🥳")
+      // console.log(cartStore.items);
     }
   }
 };

@@ -1,17 +1,15 @@
 <template>
-  <div class="flex gap-4 items-center">
-    <p class="text-left font-bold text-xl">${{ price }}</p>
-    <primary-button
-      :cart="true"
-      name="Add to Cart"
-      :smaller="true"
-      :gameId="gameId"
-    ></primary-button>
-  </div>
+  <p class="text-left font-bold text-xl">${{ price }}</p>
+  <primary-button
+    :cart="true"
+    name="Add to Cart"
+    :smaller="true"
+    :gameId="gameId"
+  ></primary-button>
 </template>
 
 <script setup lang="ts">
-import PrimaryButton from './PrimaryButton.vue';
+import PrimaryButton from "./PrimaryButton.vue";
 
 const props = defineProps<{
   price: string;

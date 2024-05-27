@@ -19,7 +19,7 @@
               />
               <div class="flex-1 flex gap-4">
                 <h3 class="font-bold text-xl">{{ item.title }}</h3>
-                <img :src="getOsIcon(item.operatingSystem)" class="w-6 h-6" />
+                <icon-o-s :os="item.operatingSystem"></icon-o-s>
               </div>
               <div class="flex items-center gap-6">
                 <span class="text-xl font-bold">{{ item.price }}</span>
@@ -89,7 +89,7 @@
         </p>
         <router-link
           to="/browse"
-          class="mt-4 bg-blue text-text-main font-semibold px-4 py-2 rounded text-lg"
+          class="mt-4 bg-blue text-text-main font-semibold px-4 py-2 rounded text-lg hover:bg-blueHi"
           >Go to Store</router-link
         >
       </div>
@@ -101,7 +101,7 @@
         <loader></loader>
         <p class="text-2xl">Please log in to purchase item</p>
         <router-link to="/login">
-          <button class="bg-secondary text-white py-4 px-5 rounded text-lg">
+          <button class="bg-blue text-white py-4 px-5 rounded text-lg w-64 hover:bg-blueHi">
             Login
           </button>
         </router-link>
@@ -118,21 +118,12 @@ import RecommendSlider from "@/components/slider/RecommendSlider.vue";
 import { RecommendCard } from "@/interfaces/Product";
 import { baseURL } from "@/constants/api";
 import Loader from "@/components/Loader.vue";
+import IconOS from "@/components/common/IconOS.vue";
 
 const authStore = useAuthStore();
 const cartStore = useCartStore();
 const loading = ref(true);
 const recommendedGames = ref<RecommendCard[]>([]);
-
-const getOsIcon = (os: string) => {
-  if (os === "Microsoft Windows") {
-    return "src/assets/icons/windows.svg";
-  } else if (os === "macOS") {
-    return "src/assets/icons/apple.svg";
-  } else {
-    return "src/assets/icons/os.svg";
-  }
-};
 
 const removeFromCart = (gameId: string) => {
   cartStore.removeFromCart(gameId);
