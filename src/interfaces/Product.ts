@@ -21,7 +21,7 @@ export interface GameState {
 
 export interface RecommendCard {
     index: number;
-    gameID: string;
+    gameID: number;
     gameName: string;
     distance: number;
     image: string;

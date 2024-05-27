@@ -17,13 +17,8 @@
     />
     <img
       class="rectangle"
-      v-else-if="cate?.startsWith('P')"
-      src="../../assets/images/co-op.png"
-    />
-    <img
-      class="rectangle"
       v-else
-      :src="defaultImage"
+      src="../../assets/images/co-op.png"
     />
     <div class="bg-bg-highlight bg-opacity-50 w-full h-56 absolute z-1"></div>
     <span
@@ -42,7 +37,6 @@ const selectCategory = () => {
   emits('selectCategory', props.cate);
 };
 
-const defaultImage = "../../assets/images/anime.png";
 </script>
 
 <style scoped lang="scss">

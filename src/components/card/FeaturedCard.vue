@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-5 gap-4 w-full bg-bg-main p-4 rounded-lg h-full">
-    <router-link :to="`games/${game.gameId}`" class="col-span-3 h-[484px]">
+    <router-link :to="`games/${game.gameId}`" class="col-span-3 h-full">
       <img
         class="object-cover w-full h-full rounded"
         :src="game.url[0]"
@@ -11,7 +11,7 @@
       <div class="flex flex-col gap-3">
         <router-link :to="`games/${game.gameId}`" class="flex flex-col gap-3">
           <h2 class="font-bold text-3xl">{{ game.title }}</h2>
-          <p>{{ game.plotAndGameplay.slice(0, 180) + "..." }}</p>
+          <p>{{ game.plotAndGameplay.slice(0, 160) + "..." }}</p>
           <div class="grid grid-cols-2 grid-rows-2 gap-2 justify-items-center">
             <img
               v-for="(image, index) in game.url.slice(1, 5)"
@@ -34,7 +34,7 @@
             @click.prevent="toggleWishlist"
             type="text"
             name="Wishlist"
-            :icon-src="wishlistIcon"
+            :btn-style="wishlistIcon"
           ></icon-button>
           <main-cta :price="game.price" :gameId="game.gameId" class="z-50"></main-cta>
         </div>
@@ -59,8 +59,8 @@ const isInWishlist = ref(false);
 
 const wishlistIcon = computed(() =>
   isInWishlist.value
-    ? "src/assets/icons/heart-fill.svg"
-    : "src/assets/icons/heart.svg"
+    ? "fill"
+    : "default"
 );
 
 const toggleWishlist = () => {
