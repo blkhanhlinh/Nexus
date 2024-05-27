@@ -5,6 +5,7 @@
         class="object-cover w-full h-full rounded"
         :src="game.url[0]"
         alt="Game Image"
+        loading="lazy"
       />
     </router-link>
     <div class="flex flex-col gap-4 col-span-2 justify-between">
@@ -18,6 +19,7 @@
               :key="index"
               :src="image"
               class="object-cover h-28 w-full rounded"
+              loading="lazy"
             />
           </div>
         </router-link>

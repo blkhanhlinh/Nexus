@@ -8,6 +8,7 @@
         :src="Array.isArray(game.url) ? game.url[0] : game.url"
         :alt="game.title"
         :class="imageClass"
+        loading="lazy"
       />
     </router-link>
     <div
@@ -62,7 +63,7 @@ const cardClass = computed(() => {
 const imageClass = computed(() => {
   switch (variant) {
     case "rowSlider":
-      return "w-full h-28 object-cover";
+      return "w-full h-32 object-cover";
     default:
       return "w-full h-48 object-cover";
   }

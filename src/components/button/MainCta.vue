@@ -1,6 +1,6 @@
 <template>
 <div class="flex gap-6 items-center">
-  <p class="text-left font-bold text-xl">${{ price }}</p>
+  <p class="text-left font-bold text-xl">{{ price === '0.00' ? 'Free' : '$'.concat(price) }}</p>
   <primary-button
     :cart="true"
     name="Add to Cart"

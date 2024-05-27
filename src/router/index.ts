@@ -54,6 +54,9 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Game Details',
     component: () => import('../views/GameDetails.vue'),
     props: true,
+    meta: {
+      PageTitle: `Game Details`
+    }
   },
   // {
   //   path: '/wishlist',

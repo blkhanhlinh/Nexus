@@ -1,6 +1,6 @@
 <template>
   <layout :is-login="true">
-    <div class="login flex flex-col justify-between mb-0">
+    <div class="login flex flex-col justify-between mb-0" loading="lazy">
       <div
         v-if="alertStore.alert"
         class="absolute top-8 flex w-screen justify-center"

@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="mb-24">
-      <img class="w-full mb-20" src="../assets/images/home_header_bg.gif" />
+      <img loading="lazy" class="w-full mb-20" src="../assets/images/home_header_bg.gif" />
       <div class="flex flex-col gap-20">
         <div class="flex flex-col gap-5">
           <h1 class="text-xl font-bold uppercase">Featured</h1>
