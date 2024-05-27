@@ -30,7 +30,7 @@
               :autoplay="{ delay: 5000, disableOnInteraction: false }"
               id="mySwiper2"
               style="
-                --swiper-navigation-color: #F3F3F3;
+                --swiper-navigation-color: #f3f3f3;
                 --swiper-navigation-size: 2rem;
               "
             >
@@ -38,7 +38,11 @@
                 v-for="(image, index) in game.url.slice(1)"
                 :key="index"
               >
-                <img :src="image" class="object-cover w-full rounded-lg" />
+                <img
+                  :src="image"
+                  loading="lazy"
+                  class="object-cover w-full rounded-lg"
+                />
               </swiper-slide>
             </swiper>
             <swiper
@@ -58,6 +62,7 @@
               >
                 <img
                   :src="image"
+                  loading="lazy"
                   class="cursor-pointer object-cover w-full rounded"
                 />
               </swiper-slide>
@@ -66,7 +71,11 @@
         </div>
         <div class="col-span-1">
           <div class="flex flex-col justify-between h-full">
-            <img :src="game.url[0]" class="h-48 w-full object-cover" />
+            <img
+              :src="game.url[0]"
+              loading="lazy"
+              class="h-48 w-full object-cover"
+            />
             <p class="">
               {{ game.plotAndGameplay.slice(0, 150).concat("...") }}
             </p>
@@ -136,7 +145,25 @@
             <h2 class="font-bold text-2xl text-text-dim">
               About {{ game.title }}
             </h2>
-            <img class="w-full h-auto" src="../assets/images/demo.gif" />
+            <!-- Embed YouTube Video -->
+            <div
+              v-if="trailerUrl"
+              class="trailer-container"
+            >
+              <iframe
+                :src="trailerUrl"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                class="w-full h-64"
+              ></iframe>
+            </div>
+            <img
+              class="trailer w-full h-auto"
+              loading="lazy"
+              src="../assets/images/demo.gif"
+              v-else
+            />
             <p class="flex flex-col items-center justify-center gap-4">
               {{ truncatedPlotAndGameplay }}
               <button @click="toggleShowFullPlot" class="text-secondary">
@@ -228,7 +255,6 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "swiper/css/pagination";
-
 import RecommendSlider from "@/components/slider/RecommendSlider.vue";
 import { gsap } from "gsap";
 import Loader from "@/components/Loader.vue";
@@ -242,6 +268,7 @@ const showFullPlot = ref<boolean>(false);
 const loading = ref<boolean>(true);
 const games = ref<RecommendCard[]>([]);
 const isInWishlist = ref(false);
+const trailerUrl = ref<string | null>(null);
 
 const wishlistIcon = computed(() => (isInWishlist.value ? "fill" : "default"));
 
@@ -257,6 +284,7 @@ const fetchGameDetails = async (id: string) => {
   try {
     const response = await axios.get<Game>(`${baseURL}game/${id}`);
     game.value = response.data;
+    await fetchTrailer(game.value.title);
     await nextTick();
     if (thumbsSwiper.value) {
       thumbsSwiper.value.update();
@@ -267,6 +295,33 @@ const fetchGameDetails = async (id: string) => {
     loading.value = false;
   }
 };
+
+const fetchTrailer = async (title: string) => {
+  try {
+    const apiKey = "AIzaSyDdYVRD6RKvuGqfP12O1HnPsTi8uMK5aTQ";
+    const response = await axios.get(
+      `https://www.googleapis.com/youtube/v3/search`,
+      {
+        params: {
+          part: "snippet",
+          q: `${title} game trailer`,
+          key: apiKey,
+          maxResults: 1,
+          type: "video",
+        },
+      }
+    );
+    const video = response.data.items[0];
+    trailerUrl.value = `https://www.youtube.com/embed/${video.id.videoId}?autoplay=1`;
+  } catch (error) {
+    console.error("Failed to fetch trailer:", error);
+  }
+};
+
+onMounted(async () => {
+  await fetchGameDetails(gameID.value);
+});
+
 
 watch(
   () => route.params.id,
@@ -303,6 +358,7 @@ const fetchRecommendGames = async (id: string) => {
 onMounted(async () => {
   await fetchGameDetails(gameID.value);
 });
+
 onMounted(async () => {
   try {
     const res = await axios.post(
@@ -333,7 +389,7 @@ const truncatedPlotAndGameplay = computed(() => {
   if (showFullPlot.value || !game.value) {
     return game.value?.plotAndGameplay;
   }
-  return game.value?.plotAndGameplay.slice(0, 340).concat("...");
+  return game.value?.plotAndGameplay.slice(0, 320).concat("...");
 });
 </script>
 
@@ -371,5 +427,19 @@ const truncatedPlotAndGameplay = computed(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.trailer-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding-bottom: 56.25%;
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>
