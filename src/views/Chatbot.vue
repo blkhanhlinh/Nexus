@@ -108,6 +108,16 @@
             </div>
           </div>
         </div>
+        <div class="flex flex-col">
+          <div
+            v-if="isRecording"
+            class="rounded-b-xl rounded-tl-xl bg-bg-hover px-4 py-2 w-fit self-end mt-4 flex"
+          >
+            <div class="animate-pulse w-fit p-2">
+              <div class="h-4 bg-text-dim rounded md:w-72"></div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="w-full p-4">
         <div class="w-full flex gap-1 justify-between">
@@ -327,6 +337,12 @@ const startRecording = () => {
     isRecording.value = true;
 
     startPulsing();
+
+    nextTick(() => {
+      if (chatContainer.value) {
+        chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
+      }
+    });
 
     mediaRecorder.addEventListener("dataavailable", (event) => {
       audioChunks.push(event.data);
