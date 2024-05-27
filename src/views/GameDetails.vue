@@ -22,16 +22,12 @@
           <div class="swiper-container">
             <swiper
               v-if="thumbsSwiper"
-              :style="{
-                '--swiper-navigation-color': '#fff',
-                '--swiper-navigation-size': '24px',
-                '--swiper-theme-color': '#4B619B',
-              }"
               :loop="true"
               :spaceBetween="30"
               :navigation="true"
               :thumbs="{ swiper: thumbsSwiper }"
               :modules="modules"
+              :autoplay="{ delay: 5000, disableOnInteraction: false }"
               class="mySwiper2"
             >
               <swiper-slide
@@ -208,7 +204,7 @@ import {
 } from "@/components/button";
 import RatingBar from "@/components/common/RatingBar.vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { FreeMode, Navigation, Thumbs, Pagination } from "swiper/modules";
+import { FreeMode, Navigation, Thumbs, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
@@ -221,7 +217,7 @@ import Loader from "@/components/Loader.vue";
 const route = useRoute();
 const gameID = ref(route.params.id as string);
 const game = ref<Game | null>(null);
-const modules = [FreeMode, Navigation, Thumbs, Pagination];
+const modules = [FreeMode, Navigation, Thumbs, Pagination, Autoplay];
 const thumbsSwiper = ref<any>(null);
 const showFullPlot = ref<boolean>(false);
 const loading = ref<boolean>(true);
@@ -252,7 +248,9 @@ watch(
     if (newGameID) {
       gameID.value = newGameID as string;
       await fetchGameDetails(gameID.value).then(() => {
-        gsap.to(window, { scrollTo: { y: 0 }, duration: 1, ease: "power2.inOut" });
+        if(screenY) {
+          gsap.to(window, { scrollTo: { y: 0 }, duration: 1, ease: "power2.inOut" });
+        }
       });
       await fetchRecommendGames(gameID.value);
     }
@@ -273,9 +271,9 @@ const fetchRecommendGames = async (id: string) => {
 };
 
 onMounted(async () => {
-  gsap.to(window, { scrollTo: { y: 0 }, duration: 1, ease: "power2.inOut" });
   await fetchGameDetails(gameID.value);
-});onMounted(async () => {
+});
+onMounted(async () => {
   try {
     const res = await axios.post(
       `${baseURL}recommender/recommend`,
@@ -339,8 +337,8 @@ const truncatedPlotAndGameplay = computed(() => {
   border-radius: 3px;
 }
 
-.mySwiper .swiper-pagination-bullet-active {
-  background-color: $color-secondary;
+.mySwiper .swiper-pagination {
+  bottom: 0 !important;
 }
 
 .swiper-slide img {

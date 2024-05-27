@@ -23,6 +23,7 @@
         },
       }"
       @swiper="onSwiper"
+      class="mySwiper"
     >
       <swiper-slide v-for="(item, index) in categories" :key="index">
         <category-card :cate="item" @click="handleCategoryClick(item)"></category-card>
@@ -32,12 +33,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineEmits } from "vue";
+import { ref } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import "swiper/css/free-mode";
 import CategoryCard from "@/components/card/CategoryCard.vue";
 
 const props = defineProps<{
@@ -55,16 +57,8 @@ const handleCategoryClick = (category: string) => {
   emit("selectCategory", category);
 };
 
-const modules = [Navigation, Pagination];
+const modules = [Navigation, Pagination, Autoplay];
 </script>
 
 <style lang="scss" scoped>
-.swiper-slide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.swiper {
-  padding: 0 1.5rem !important;
-}
 </style>

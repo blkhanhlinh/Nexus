@@ -4,23 +4,25 @@
 
 @layer base {
   @font-face {
-    font-family: 'Motiva Sans';
-    src: url('~@/assets/fonts/MotivaSans.ttf');
+    font-family: "Motiva Sans";
+    src: url("~@/assets/fonts/MotivaSans.ttf");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
   }
-  
+
   @font-face {
-    font-family: 'Motiva Sans Bold';
-    src: url('~@/assets/fonts/MotivaSans-Bold.ttf');
+    font-family: "Motiva Sans Bold";
+    src: url("~@/assets/fonts/MotivaSans-Bold.ttf");
     font-weight: 700;
     font-style: normal;
     font-display: swap;
   }
 
   html {
-    font-family: 'Motiva Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: "Motiva Sans", system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+      "Helvetica Neue", sans-serif;
   }
 }
 
@@ -37,7 +39,7 @@ body {
   color: $text-main;
   background: $gradient-store-background;
   transition: color 0.5s, background-color 0.5s;
-  font-family: 'Motiva Sans', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Motiva Sans", system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-size: 14px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -53,7 +55,7 @@ blockquote::before,
 blockquote::after,
 q::before,
 q::after {
-  content: '';
+  content: "";
   content: none;
 }
 
@@ -74,4 +76,45 @@ textarea {
   margin: 0;
   vertical-align: baseline;
   outline: none;
+}
+
+.mySwiper {
+  height: 100%;
+  width: 100%;
+  padding: 0 1.5rem !important;
+  .swiper-pagination {
+    position: relative;
+    margin-top: 2rem;
+  }
+
+  .swiper-pagination-bullet {
+    color: $bg-main;
+    width: 2.25rem;
+    border-radius: 9999px;
+    margin: 0 0.5rem;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: $color-secondary;
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: $text-main;
+    position: absolute;
+  }
+
+  .swiper-button-prev {
+    left: 0;
+  }
+
+  .swiper-button-next {
+    right: 0;
+  }
+
+  .swiper-button-prev:after,
+  .swiper-button-next:after {
+    font-size: 24px;
+    font-weight: 700;
+  }
 }

@@ -10,11 +10,11 @@
           rows: grid.rows,
           fill: grid.fill as 'row' | 'column' | undefined,
         }"
+      class="mySwiper"
     >
       <swiper-slide
         v-for="item in games"
         :key="item.gameId"
-        class="swiper-slide-custom"
       >
         <game-card
           :game="item"
@@ -34,6 +34,7 @@ import "swiper/css";
 import "swiper/css/grid";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import "swiper/css/free-mode";
 import GameCard from "../card/GameCard.vue";
 import { useGameStore } from "@/stores/game.store";
 
@@ -115,17 +116,4 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.swiper {
-  width: 100%;
-  height: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 1.5rem !important;
-}
-
-.swiper-slide-custom {
-  display: flex;
-  align-items: stretch;
-  height: auto;
-}
 </style>
