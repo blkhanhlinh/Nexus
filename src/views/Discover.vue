@@ -56,7 +56,7 @@
         <loader></loader>
         <p class="text-2xl">Please log in to see your feed</p>
         <router-link to="/login">
-          <button class="bg-secondary text-white py-4 px-5 rounded text-lg">
+          <button class="bg-secondary text-white py-4 px-5 rounded text-lg w-64">
             Login
           </button>
         </router-link>
@@ -154,7 +154,7 @@ onMounted(() => {
   }
 }
 .discover-block {
-  height: calc(100vh - 105px);
+  height: calc(100vh - 240px);
   width: 100%;
 }
 </style>

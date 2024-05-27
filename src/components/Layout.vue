@@ -1,8 +1,8 @@
 <template>
     <Navbar :show-subnav="!isLogin" />
-    <main v-bind="$attrs" class="mt-[105px]">
+    <main v-bind="$attrs" :class="isLogin ? 'pt-[52px]' : 'pt-[105px]'">
         <div :class="
-            isLogin || isFull ? '' : 'container mx-auto pb-20 px-2'
+            isLogin || isFull ? '' : 'container mx-auto pb-20 px-4'
         ">
             <slot></slot>
         </div>

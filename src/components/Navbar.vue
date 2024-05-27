@@ -1,7 +1,7 @@
 <template>
-  <div ref="navbar" class="w-full min-h-fit fixed top-0 left-0 right-0 z-50">
+  <div ref="navbar" class="navbar w-full min-h-fit fixed top-0 left-0 right-0 z-50">
     <header class="bg-bg-main w-full min-h-full">
-      <div class="mx-auto container p-2 flex flex-col">
+      <div class="mx-auto container py-2 px-4">
         <div class="flex justify-between">
           <div class="flex items-center gap-16">
             <a class="logo" href="/">
@@ -27,7 +27,7 @@
           <div class="iconlist flex gap-4 items-center">
             <router-link
               to="/wishlist"
-              class="w-14 h-9 bg-bg-highlight flex items-center justify-center rounded relative"
+              class="w-14 h-9 bg-bg-highlight flex items-center justify-center rounded"
             >
               <img src="../assets/icons/filled-heart.svg" />
             </router-link>
@@ -119,28 +119,27 @@
       </div>
     </header>
     <div v-if="showSubnav" class="bg-bg-tertiary w-full">
-      <div class="flex items-center p-2 mx-auto container">
+      <div class="flex items-center py-2 px-4 mx-auto container">
         <div class="flex justify-between w-full">
           <nav class="subnav inline-flex gap-4">
             <router-link to="/" class="px-4 py-2">Home</router-link>
             <router-link to="/browse" class="px-4 py-2">Browse</router-link>
             <router-link to="/discover" class="px-4 py-2">Discover</router-link>
-            <router-link to="/points-shop" class="px-4 py-2"
+            <router-link to="/points-shop" class="px-4 py-2 w-max"
               >Points Shop</router-link
             >
-            <router-link to="/curators" class="px-4 py-2">Curators</router-link>
             <router-link to="/gift-cards" class="px-4 py-2"
               >Gift Cards</router-link
             >
             <router-link to="/news" class="px-4 py-2">News</router-link>
           </nav>
           <div
-            class="flex justify-between py-2 px-4 bg-bg-main bg-opacity-20 rounded w-[400px] relative"
+            class="flex justify-between py-2 px-4 bg-bg-main bg-opacity-20 rounded relative"
           >
             <input
               v-model="searchQuery"
               @input="searchGames"
-              class="bg-opacity-0 bg-bg-main text-text-main placeholder:text-secondary w-full"
+              class="bg-opacity-0 bg-bg-main text-text-main placeholder:text-secondary md:w-80 sm:w-56"
               placeholder="Search..."
             />
             <img src="../assets/icons/search.svg" />
@@ -219,7 +218,6 @@ const subNavRoutes = [
   "/browse",
   "/discover",
   "/points-shop",
-  "/curators",
   "/gift-cards",
   "/news",
 ];

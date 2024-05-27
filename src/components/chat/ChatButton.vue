@@ -159,7 +159,7 @@
                     First, let's log in or create an account to chat with me.
                   </p>
                   <router-link to="/login">
-                    <button class="mt-2 bg-secondary text-white p-2 rounded">
+                    <button class="mt-2 bg-blue text-white p-2 rounded hover:bg-blueHi">
                       Login
                     </button>
                   </router-link>

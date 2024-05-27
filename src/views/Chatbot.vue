@@ -1,6 +1,6 @@
 <template>
   <Navbar />
-  <main class="bg-bg-main w-full h-full">
+  <main class="bg-bg-main w-full h-full pt-[52px]">
     <div class="page container mx-auto py-4 flex flex-col justify-between">
       <div
         v-if="isFetchingHistory"
