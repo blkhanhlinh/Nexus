@@ -365,6 +365,7 @@ const filterGames = async () => {
         : undefined,
   };
   games.value = (await gameStore.searchGame(searchParams)) || [];
+  browseContainer.value?.scrollIntoView({ behavior: "smooth" });
 };
 
 const handleViewTypeChange = async (viewType: string) => {
