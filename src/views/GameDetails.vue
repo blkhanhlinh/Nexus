@@ -28,7 +28,11 @@
               :thumbs="{ swiper: thumbsSwiper }"
               :modules="modules"
               :autoplay="{ delay: 5000, disableOnInteraction: false }"
-              class="mySwiper2"
+              id="mySwiper2"
+              style="
+                --swiper-navigation-color: #F3F3F3;
+                --swiper-navigation-size: 2rem;
+              "
             >
               <swiper-slide
                 v-for="(image, index) in game.url.slice(1)"
@@ -46,8 +50,7 @@
               :freeMode="true"
               :watchSlidesProgress="true"
               :modules="modules"
-              :pagination="{ clickable: true }"
-              class="mySwiper"
+              id="mySwiper1"
             >
               <swiper-slide
                 v-for="(image, index) in game.url.slice(1)"
@@ -133,13 +136,10 @@
             <h2 class="font-bold text-2xl text-text-dim">
               About {{ game.title }}
             </h2>
-            <img class="w-full h-auto" src="../assets/images/demo.gif"/>
+            <img class="w-full h-auto" src="../assets/images/demo.gif" />
             <p class="flex flex-col items-center justify-center gap-4">
               {{ truncatedPlotAndGameplay }}
-              <button
-                @click="toggleShowFullPlot"
-                class="text-secondary"
-              >
+              <button @click="toggleShowFullPlot" class="text-secondary">
                 {{ showFullPlot ? "Show Less" : "Show More" }}
               </button>
             </p>
@@ -148,27 +148,39 @@
         <div class="p-6 bg-bg-main rounded-lg h-fit flex flex-col gap-2">
           <h2 class="text-lg text-text-dim">Features</h2>
           <div class="flex flex-col gap-2">
-            <div class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3">
+            <div
+              class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3"
+            >
               <img src="../assets/icons/single-player.svg" />
               <p class="text-chalkyBlue">Single Player</p>
             </div>
-            <div class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3">
+            <div
+              class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3"
+            >
               <img src="../assets/icons/co-op.svg" />
               <p class="text-chalkyBlue">Online Co-Op</p>
             </div>
-            <div class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3">
+            <div
+              class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3"
+            >
               <img src="../assets/icons/achv.svg" />
               <p class="text-chalkyBlue">Nexus Achievements</p>
             </div>
-            <div class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3">
+            <div
+              class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3"
+            >
               <img src="../assets/icons/controller.svg" />
               <p class="text-chalkyBlue">Full Controller Support</p>
             </div>
-            <div class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3">
+            <div
+              class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3"
+            >
               <img src="../assets/icons/cards.svg" />
               <p class="text-chalkyBlue">Nexus Trading Cards</p>
             </div>
-            <div class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3">
+            <div
+              class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3"
+            >
               <img src="../assets/icons/cloud.svg" />
               <p class="text-chalkyBlue">Nexus Cloud</p>
             </div>
@@ -204,12 +216,19 @@ import {
 } from "@/components/button";
 import RatingBar from "@/components/common/RatingBar.vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { FreeMode, Navigation, Thumbs, Pagination, Autoplay } from "swiper/modules";
+import {
+  FreeMode,
+  Navigation,
+  Thumbs,
+  Pagination,
+  Autoplay,
+} from "swiper/modules";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "swiper/css/pagination";
+
 import RecommendSlider from "@/components/slider/RecommendSlider.vue";
 import { gsap } from "gsap";
 import Loader from "@/components/Loader.vue";
@@ -222,17 +241,13 @@ const thumbsSwiper = ref<any>(null);
 const showFullPlot = ref<boolean>(false);
 const loading = ref<boolean>(true);
 const games = ref<RecommendCard[]>([]);
-  const isInWishlist = ref(false);
+const isInWishlist = ref(false);
 
-const wishlistIcon = computed(() =>
-  isInWishlist.value
-    ? "fill"
-    : "default"
-);
+const wishlistIcon = computed(() => (isInWishlist.value ? "fill" : "default"));
 
 const toggleWishlist = () => {
   isInWishlist.value = !isInWishlist.value;
-}
+};
 
 const onSwiper = (swiper: any) => {
   thumbsSwiper.value = swiper;
@@ -259,8 +274,12 @@ watch(
     if (newGameID) {
       gameID.value = newGameID as string;
       await fetchGameDetails(gameID.value).then(() => {
-        if(screenY) {
-          gsap.to(window, { scrollTo: { y: 0 }, duration: 1, ease: "power2.inOut" });
+        if (screenY) {
+          gsap.to(window, {
+            scrollTo: { y: 0 },
+            duration: 1,
+            ease: "power2.inOut",
+          });
         }
       });
       await fetchRecommendGames(gameID.value);
@@ -328,28 +347,24 @@ const truncatedPlotAndGameplay = computed(() => {
   background-position: center;
 }
 
-.mySwiper2 {
+#mySwiper2 {
   width: 100%;
   height: 400px;
 }
 
-.mySwiper {
+#mySwiper1 {
   height: 112px;
   margin-top: 24px;
-}
 
-.mySwiper .swiper-slide {
-  width: 25%;
-  height: 100%;
-}
+  .swiper-slide {
+    width: 25%;
+    height: 100%;
+  }
 
-.mySwiper .swiper-slide-thumb-active {
-  border: 2px solid $color-secondary;
-  border-radius: 3px;
-}
-
-.mySwiper .swiper-pagination {
-  bottom: 0 !important;
+  .swiper-slide-thumb-active {
+    border: 2px solid $color-secondary;
+    border-radius: 3px;
+  }
 }
 
 .swiper-slide img {

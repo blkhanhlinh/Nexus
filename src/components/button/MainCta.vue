@@ -1,4 +1,5 @@
 <template>
+<div class="flex gap-6 items-center">
   <p class="text-left font-bold text-xl">${{ price }}</p>
   <primary-button
     :cart="true"
@@ -6,6 +7,7 @@
     :smaller="true"
     :gameId="gameId"
   ></primary-button>
+</div>
 </template>
 
 <script setup lang="ts">

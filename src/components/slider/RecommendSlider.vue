@@ -7,6 +7,21 @@
       :centeredSlides="false"
       :pagination="{ clickable: true }"
       :navigation="true"
+      :breakpoints="{
+        '640': {
+          slidesPerView: 1,
+          spaceBetween: 10,
+        },
+        '768': {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        '1024': {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+      }"
+      class="mySwiper"
     >
       <swiper-slide
         v-for="item in props.games"
@@ -31,14 +46,17 @@
                 {{ item.gameName }}
               </h3>
               <icon-button
+                @click.prevent="toggleWishlist"
                 type="icon"
-                name="Wishlist"
-                icon-src="/src/assets/icons/heart.svg"
+                :btn-style="wishlistIcon"
               ></icon-button>
             </div>
             <div class="flex justify-between items-center">
               <icon-o-s :os="item.os[0]"></icon-o-s>
-              <main-cta :price="item.price" :gameId="item.gameID.toString()"></main-cta>
+              <main-cta
+                :price="item.price"
+                :gameId="item.gameID.toString()"
+              ></main-cta>
             </div>
           </div>
         </div>
@@ -48,6 +66,7 @@
 </template>
 
 <script lang="ts" setup>
+import { ref, computed } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -69,6 +88,14 @@ const props = defineProps<{
   games: RecommendCard[];
 }>();
 
+const isInWishlist = ref(false);
+
+const wishlistIcon = computed(() => (isInWishlist.value ? "fill" : "default"));
+
+const toggleWishlist = () => {
+  isInWishlist.value = !isInWishlist.value;
+};
+
 const goToGameDetails = (gameID: number) => {
   router.push(`/games/${gameID}`).then(() => {
     gsap.to(window, { scrollTo: { y: 0 }, duration: 1, ease: "power2.inOut" });
@@ -76,47 +103,5 @@ const goToGameDetails = (gameID: number) => {
 };
 </script>
 
-<style scoped>
-.swiper {
-  width: 100%;
-  padding: 0 1.5rem !important;
-}
-</style>
-
-<style lang="scss">
-.swiper-pagination {
-  position: relative !important;
-  margin-top: 2rem !important;
-}
-
-.swiper-pagination-bullet {
-  color: $bg-main !important;
-  width: 2.25rem !important;
-  border-radius: 9999px !important;
-  margin: 0 0.5rem !important;
-}
-
-.swiper-pagination-bullet-active {
-  background-color: $color-secondary !important;
-}
-
-.swiper-button-prev,
-.swiper-button-next {
-  color: $text-main !important;
-  position: absolute !important;
-}
-
-.swiper-button-prev {
-  left: 0 !important;
-}
-
-.swiper-button-next {
-  right: 0 !important;
-}
-
-.swiper-button-prev:after,
-.swiper-button-next:after {
-  font-size: 24px !important;
-  font-weight: 700 !important;
-}
+<style lang="scss" scoped>
 </style>
