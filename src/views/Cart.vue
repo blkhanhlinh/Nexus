@@ -133,11 +133,11 @@ const clearCart = () => {
   cartStore.clearCart();
 };
 
-const fetchRecommendGames = async (gameId: string) => {
+const fetchRecommendGames = async (gameIds: number[]) => {
   try {
     const res = await axios.post(
-      `${baseURL}recommender/recommend`,
-      { id: gameId, top_k: 10 },
+      `${baseURL}recommender/multirecommend`,
+      { productList: gameIds, top_k: 10 },
       { headers: { "Content-Type": "application/json" } }
     );
     return res.data.response;
@@ -147,18 +147,13 @@ const fetchRecommendGames = async (gameId: string) => {
   }
 };
 
-const loadRecommendGames = async () => {
-  const allRecommendedGames: RecommendCard[] = [];
-  for (const item of cartStore.items) {
-    const recommended = await fetchRecommendGames(item.gameId);
-    allRecommendedGames.push(...recommended);
-  }
-  recommendedGames.value = allRecommendedGames;
-};
-
 onMounted(() => {
   if (cartStore.items.length > 0) {
-    loadRecommendGames();
+    const gameIds = cartStore.items.map((item) => parseInt(item.gameId));
+    fetchRecommendGames(gameIds).then((games) => {
+      recommendedGames.value = games;
+      loading.value = false;
+    });
     loading.value = false;
   }
 });
