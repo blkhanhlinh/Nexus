@@ -16,6 +16,7 @@
                 :src="item.image"
                 :alt="item.title"
                 class="h-32 w-64 object-cover"
+                loading="lazy"
               />
               <div class="flex-1 flex gap-4">
                 <h3 class="font-bold text-xl">{{ item.title }}</h3>
@@ -37,8 +38,8 @@
             </div>
             <div class="bg-bg-main rounded-lg p-4 flex gap-4 flex-col">
               <div class="flex justify-between items-center">
-                <h2 class="text-xl font-bold">Estimated total</h2>
-                <div class="flex gap-6">
+                <h2 class="text-xl font-bold">Estimated Total</h2>
+                <div class="flex gap-6 items-center">
                   <p class="text-2xl font-bold">{{ cartStore.totalAmount }}</p>
                   <button
                     @click="clearCart"
@@ -76,13 +77,19 @@
         </div>
         <div class="flex flex-col gap-4 col-span-3 mt-8">
           <h1 class="text-2xl font-bold">Games you may like</h1>
-          <div v-if="loading" class="md:h-40 w-full flex justify-center items-center">
+          <div
+            v-if="loading"
+            class="md:h-40 w-full flex justify-center items-center"
+          >
             <loader></loader>
           </div>
           <recommend-slider v-else :games="recommendedGames"></recommend-slider>
         </div>
       </div>
-      <div v-else class="flex flex-col items-center h-max rounded-lg bg-bg-main gap-8 py-12">
+      <div
+        v-else
+        class="flex flex-col items-center h-max rounded-lg bg-bg-main gap-8 py-12"
+      >
         <loader></loader>
         <p class="text-2xl">
           Your cart is empty. Browse Nexus to buy your favorite games.
@@ -95,24 +102,26 @@
       </div>
     </div>
     <div
-        v-else
-        class="cart-block flex flex-col gap-4 items-center justify-center"
-      >
-        <loader></loader>
-        <p class="text-2xl">Please log in to purchase item</p>
-        <router-link to="/login">
-          <button class="bg-blue text-white py-4 px-5 rounded text-lg w-64 hover:bg-blueHi">
-            Login
-          </button>
-        </router-link>
-      </div>
+      v-else
+      class="cart-block flex flex-col gap-4 items-center justify-center"
+    >
+      <loader></loader>
+      <p class="text-2xl">Please log in to purchase items</p>
+      <router-link to="/login">
+        <button
+          class="bg-blue text-white py-4 px-5 rounded text-lg w-64 hover:bg-blueHi"
+        >
+          Login
+        </button>
+      </router-link>
+    </div>
   </layout>
 </template>
 
 <script setup lang="ts">
 import { useAuthStore, useCartStore } from "@/stores";
 import axios from "axios";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import Layout from "@/components/Layout.vue";
 import RecommendSlider from "@/components/slider/RecommendSlider.vue";
 import { RecommendCard } from "@/interfaces/Product";
@@ -127,10 +136,12 @@ const recommendedGames = ref<RecommendCard[]>([]);
 
 const removeFromCart = (gameId: string) => {
   cartStore.removeFromCart(gameId);
+  updateRecommendations();
 };
 
 const clearCart = () => {
   cartStore.clearCart();
+  updateRecommendations();
 };
 
 const fetchRecommendGames = async (gameIds: number[]) => {
@@ -146,21 +157,33 @@ const fetchRecommendGames = async (gameIds: number[]) => {
     return [];
   }
 };
+const updateRecommendations = async () => {
+  if (cartStore.items.length > 0) {
+    loading.value = true;
+    const gameIds = cartStore.items.map((item) => parseInt(item.gameId));
+    const games = await fetchRecommendGames(gameIds);
+    recommendedGames.value = games;
+    loading.value = false;
+  } else {
+    recommendedGames.value = [];
+  }
+};
 
 onMounted(() => {
-  if (cartStore.items.length > 0) {
-    const gameIds = cartStore.items.map((item) => parseInt(item.gameId));
-    fetchRecommendGames(gameIds).then((games) => {
-      recommendedGames.value = games;
-      loading.value = false;
-    });
-    loading.value = false;
-  }
+  updateRecommendations();
 });
+
+watch(
+  () => cartStore.items,
+  () => {
+    updateRecommendations();
+  },
+  { deep: true }
+);
 </script>
 
 <style scoped lang="scss">
 .cart-block {
-  height: calc(100vh - 105px)
+  height: calc(100vh - 105px);
 }
 </style>
