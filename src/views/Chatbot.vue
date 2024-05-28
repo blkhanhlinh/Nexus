@@ -69,9 +69,8 @@
             <div v-if="!pair.loading && pair.answer" class="w-fit flex gap-2">
               <div
                 class="rounded-bl-xl rounded-e-xl bg-bg-hover px-4 py-2 w-fit float-left mt-3"
-              >
-                {{ pair.answer }}
-              </div>
+                v-html="formatAnswer(pair.answer)"
+              ></div>
               <div
                 v-if="pair.audioUrl"
                 @click="toggleAudio(pair)"
@@ -160,14 +159,15 @@
               </svg>
             </div>
           </div>
-          <input
+          <textarea
             v-model="message"
-            type="text"
-            class="w-full bg-bg-hover rounded-full p-4"
-            placeholder="Type your message..."
+            class="w-full bg-bg-hover rounded-full p-4 overflow-y-hidden max-h-52 resize-none"
+            placeholder="Message Nexus Bot"
             :disabled="!isAuthenticated"
-            @keyup.enter="handleSendMessage"
-          />
+            @keydown="handleKeyPress"
+            @input="adjustHeight"
+            rows="1"
+          ></textarea>
           <div class="flex gap-1 mr-2">
             <div class="p-1 flex items-center">
               <svg
@@ -258,6 +258,18 @@ const stopPulsing = () => {
   }
 };
 
+const formatAnswer = (answer: string) => {
+  return answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+};
+
+const adjustHeight = () => {
+  const textarea = chatContainer.value?.querySelector("textarea");
+  if (textarea) {
+    textarea.style.height = "auto";
+    textarea.style.height = textarea.scrollHeight + "px";
+  }
+};
+
 onMounted(async () => {
   if (isAuthenticated.value) {
     isFetchingHistory.value = true;
@@ -276,6 +288,7 @@ onMounted(async () => {
         chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
       }
     });
+    adjustHeight();
   }
 });
 
@@ -324,6 +337,27 @@ const handleSendMessage = async () => {
       chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
     }
   });
+};
+
+const handleKeyPress = (event: KeyboardEvent) => {
+  const target = event.target as HTMLInputElement | null;
+
+  if (event.key === "Enter" && event.shiftKey) {
+    event.preventDefault();
+    if (target) {
+      const start = message.value.slice(0, target.selectionStart ?? 0);
+      const end = message.value.slice(target.selectionEnd ?? 0);
+      message.value = start + "\n" + end;
+
+      nextTick(() => {
+        target.selectionStart = target.selectionEnd = start.length + 1;
+      });
+    }
+  } else if (event.key === "Enter") {
+    event.preventDefault();
+    handleSendMessage();
+  }
+  adjustHeight();
 };
 
 // Voice recording and transcription
