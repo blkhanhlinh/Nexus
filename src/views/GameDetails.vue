@@ -27,7 +27,7 @@
               :navigation="true"
               :thumbs="{ swiper: thumbsSwiper }"
               :modules="modules"
-              :autoplay="{ delay: 5000, disableOnInteraction: false }"
+              :autoplay="{ delay: 4000, disableOnInteraction: false }"
               id="mySwiper2"
               style="
                 --swiper-navigation-color: #f3f3f3;
@@ -146,10 +146,7 @@
               About {{ game.title }}
             </h2>
             <!-- Embed YouTube Video -->
-            <div
-              v-if="trailerUrl"
-              class="trailer-container"
-            >
+            <div v-if="trailerUrl" class="trailer-container">
               <iframe
                 :src="trailerUrl"
                 frameborder="0"
@@ -280,6 +277,57 @@ const onSwiper = (swiper: any) => {
   thumbsSwiper.value = swiper;
 };
 
+const apiKeys = [
+  "AIzaSyDirnTJUfnU8fPkrRdUzcMinOHpfEjHeiE",
+  "AIzaSyB3HlR5i-1JYXccBbddmFIsVhb8PHltYys",
+  "AIzaSyDsftzASOpt51GZjtI41OzzXvuC7RHTkLE",
+  "AIzaSyDbd1ctHxls9OOIFBwjDBVBPk3tqWz7qM8",
+  "AIzaSyCCy0BxvgTli0SKmioDHCgmhX9_Smnsc9s",
+  "AIzaSyD_4-T2P10VGVp5YhMO4KRnRMPvF0Ytn9I"
+];
+let apiKeyIndex = 0;
+
+const fetchTrailer = async (title: string) => {
+  const storedTrailerUrl = localStorage.getItem(`trailerUrl_${gameID.value}`);
+  if (storedTrailerUrl) {
+    trailerUrl.value = storedTrailerUrl;
+    return;
+  }
+
+  const makeApiCall = async () => {
+    try {
+      const response = await axios.get(
+        `https://www.googleapis.com/youtube/v3/search`,
+        {
+          params: {
+            part: "snippet",
+            q: `${title} game official trailer`,
+            key: apiKeys[apiKeyIndex],
+            maxResults: 1,
+            type: "video",
+          },
+        }
+      );
+      const video = response.data.items[0];
+      trailerUrl.value = `https://www.youtube.com/embed/${video.id.videoId}?autoplay=1`;
+      localStorage.setItem(`trailerUrl_${gameID.value}`, trailerUrl.value);
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status === 403 &&
+        apiKeyIndex < apiKeys.length - 1
+      ) {
+        apiKeyIndex++;
+        await makeApiCall();
+      } else {
+        console.error("Failed to fetch trailer:", error);
+      }
+    }
+  };
+
+  await makeApiCall();
+};
+
 const fetchGameDetails = async (id: string) => {
   try {
     const response = await axios.get<Game>(`${baseURL}game/${id}`);
@@ -295,35 +343,6 @@ const fetchGameDetails = async (id: string) => {
     loading.value = false;
   }
 };
-
-const fetchTrailer = async (title: string) => {
-  try {
-    const apiKeys = ["AIzaSyCCy0BxvgTli0SKmioDHCgmhX9_Smnsc9s", "AIzaSyBDAhAGuH_NlfDY9OsCJAya4fIb9bTyDJs"];
-    const apiKey = apiKeys[Math.floor(Math.random() * apiKeys.length)];
-
-    const response = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search`,
-      {
-        params: {
-          part: "snippet",
-          q: `${title} game trailer`,
-          key: apiKey,
-          maxResults: 1,
-          type: "video",
-        },
-      }
-    );
-    const video = response.data.items[0];
-    trailerUrl.value = `https://www.youtube.com/embed/${video.id.videoId}?autoplay=1`;
-  } catch (error) {
-    console.error("Failed to fetch trailer:", error);
-  }
-};
-
-onMounted(async () => {
-  await fetchGameDetails(gameID.value);
-});
-
 
 watch(
   () => route.params.id,
