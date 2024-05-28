@@ -212,6 +212,7 @@ import { useChatStore } from "@/stores/chat.store";
 import Navbar from "@/components/Navbar.vue";
 import gsap from "gsap";
 import Loader from "@/components/Loader.vue";
+import { marked } from 'marked';
 
 const authStore = useAuthStore();
 const chatStore = useChatStore();
@@ -259,7 +260,7 @@ const stopPulsing = () => {
 };
 
 const formatAnswer = (answer: string) => {
-  return answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+  return marked(answer);
 };
 
 const adjustHeight = () => {
