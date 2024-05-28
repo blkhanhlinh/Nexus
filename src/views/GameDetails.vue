@@ -311,14 +311,12 @@ const fetchTrailer = async (title: string) => {
       const video = response.data.items[0];
       trailerUrl.value = `https://www.youtube.com/embed/${video.id.videoId}?autoplay=1`;
       localStorage.setItem(`trailerUrl_${gameID.value}`, trailerUrl.value);
-    } catch (error) {
-      if (
-        error.response &&
-        error.response.status === 403 &&
-        apiKeyIndex < apiKeys.length - 1
-      ) {
+    } catch (error: any) {
+      if (error.response?.status === 403) {
         apiKeyIndex++;
-        await makeApiCall();
+        if (apiKeyIndex < apiKeys.length) {
+          await makeApiCall();
+        }
       } else {
         console.error("Failed to fetch trailer:", error);
       }

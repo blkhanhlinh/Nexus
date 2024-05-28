@@ -390,7 +390,7 @@ const formatAnswer = (answer: string) => {
 const handleSendMessage = async () => {
   if (message.value.trim() === "") return;
 
-  const newMessage = { question: message.value, answer: null };
+  const newMessage = { question: message.value, answer: null, loading: true };
   chatHistory.value.push(newMessage);
 
   const queryIndex = chatHistory.value.length - 1;
@@ -425,7 +425,7 @@ const handleSendMessage = async () => {
   });
 };
 
-const fetchAudio = async (text, queryIndex) => {
+const fetchAudio = async (text: string, queryIndex: number) => {
   const audioUrl = await chatStore.textToSpeech(text);
   if (audioUrl) {
     chatHistory.value[queryIndex].audioUrl = audioUrl;
