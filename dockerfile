@@ -20,4 +20,4 @@ RUN npm run build
 EXPOSE 8080
 
 # Lệnh chạy khi container được khởi chạy
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "build"]
