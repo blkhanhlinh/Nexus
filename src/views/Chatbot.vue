@@ -212,7 +212,7 @@ import { useChatStore } from "@/stores/chat.store";
 import Navbar from "@/components/Navbar.vue";
 import gsap from "gsap";
 import Loader from "@/components/Loader.vue";
-import { marked } from 'marked';
+import { marked } from "marked";
 
 const authStore = useAuthStore();
 const chatStore = useChatStore();
@@ -313,22 +313,13 @@ const handleSendMessage = async () => {
   try {
     await chatStore.fetchAnswer(newMessage.question);
     chatHistory.value[queryIndex].answer = chatStore.answer;
+    chatHistory.value[queryIndex].loading = false;
+    isFetching.value = false;
 
-    const audioUrl = await chatStore.textToSpeech(chatStore.answer);
-    if (audioUrl) {
-      chatHistory.value[queryIndex].audioUrl = audioUrl;
-      const audio = new Audio(audioUrl);
-      audio.play();
-      chatHistory.value[queryIndex].isPlaying = true;
-      chatHistory.value[queryIndex].audioElement = audio;
-      audio.addEventListener("ended", () => {
-        chatHistory.value[queryIndex].isPlaying = false;
-      });
-    }
+    fetchAudio(chatStore.answer, queryIndex);
   } catch (error) {
     console.log("Failed to get chatbot answer", error);
     chatHistory.value[queryIndex].answer = "Sorry, there was an error.";
-  } finally {
     chatHistory.value[queryIndex].loading = false;
     isFetching.value = false;
   }
@@ -338,6 +329,20 @@ const handleSendMessage = async () => {
       chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
     }
   });
+};
+
+const fetchAudio = async (text: string, queryIndex: number) => {
+  const audioUrl = await chatStore.textToSpeech(text);
+  if (audioUrl) {
+    chatHistory.value[queryIndex].audioUrl = audioUrl;
+    const audio = new Audio(audioUrl);
+    audio.play();
+    chatHistory.value[queryIndex].isPlaying = true;
+    chatHistory.value[queryIndex].audioElement = audio;
+    audio.addEventListener("ended", () => {
+      chatHistory.value[queryIndex].isPlaying = false;
+    });
+  }
 };
 
 const handleKeyPress = (event: KeyboardEvent) => {
