@@ -257,7 +257,7 @@
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  :class="{ 'opacity-50': !isAuthenticated }"
+                  :class="{ 'opacity-50 cursor-not-allowed': !isAuthenticated }"
                   class="cursor-pointer"
                   @click="startRecording"
                 >
@@ -295,6 +295,7 @@
                 placeholder="Type your message..."
                 :disabled="!isAuthenticated"
                 @keyup.enter="handleSendMessage"
+                :class="{ 'opacity-50 cursor-not-allowed': !isAuthenticated }"
               />
               <div class="flex gap-1 mr-2">
                 <div class="p-1 flex items-center">
@@ -305,7 +306,7 @@
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    :class="{ 'opacity-50': !isAuthenticated }"
+                    :class="{ 'opacity-50 cursor-not-allowed': !isAuthenticated }"
                     class="cursor-pointer"
                     @click="handleSendMessage"
                   >

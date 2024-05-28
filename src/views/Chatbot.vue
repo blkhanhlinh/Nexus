@@ -128,7 +128,7 @@
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              :class="{ 'opacity-50': !isAuthenticated }"
+              :class="{ 'opacity-50 cursor-not-allowed': !isAuthenticated }"
               class="cursor-pointer"
               @click="startRecording"
             >
@@ -166,6 +166,7 @@
             :disabled="!isAuthenticated"
             @keydown="handleKeyPress"
             @input="adjustHeight"
+            :class="{ 'opacity-50 cursor-not-allowed': !isAuthenticated }"
             rows="1"
           ></textarea>
           <div class="flex gap-1 mr-2">
@@ -177,7 +178,7 @@
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                :class="{ 'opacity-50': !isAuthenticated }"
+                :class="{ 'opacity-50 cursor-not-allowed': !isAuthenticated }"
                 class="cursor-pointer"
                 @click="handleSendMessage"
               >

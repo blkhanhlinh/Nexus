@@ -169,44 +169,79 @@
             </p>
           </div>
         </div>
-        <div class="p-6 bg-bg-main rounded-lg h-fit flex flex-col gap-2">
-          <h2 class="text-lg text-text-dim">Features</h2>
-          <div class="flex flex-col gap-2">
-            <div
-              class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3"
-            >
-              <img src="../assets/icons/single-player.svg" />
-              <p class="text-chalkyBlue">Single Player</p>
+        <div class="flex flex-col flex-1 gap-4">
+          <div class="p-6 bg-bg-main rounded-lg h-fit flex flex-col gap-2">
+            <h2 class="text-lg text-text-dim">Features</h2>
+            <div class="flex flex-col gap-2">
+              <div
+                class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3"
+              >
+                <img src="../assets/icons/single-player.svg" />
+                <p class="text-chalkyBlue">Single Player</p>
+              </div>
+              <div
+                class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3"
+              >
+                <img src="../assets/icons/co-op.svg" />
+                <p class="text-chalkyBlue">Online Co-Op</p>
+              </div>
+              <div
+                class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3"
+              >
+                <img src="../assets/icons/achv.svg" />
+                <p class="text-chalkyBlue">Nexus Achievements</p>
+              </div>
+              <div
+                class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3"
+              >
+                <img src="../assets/icons/controller.svg" />
+                <p class="text-chalkyBlue">Full Controller Support</p>
+              </div>
+              <div
+                class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3"
+              >
+                <img src="../assets/icons/cards.svg" />
+                <p class="text-chalkyBlue">Nexus Trading Cards</p>
+              </div>
+              <div
+                class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3"
+              >
+                <img src="../assets/icons/cloud.svg" />
+                <p class="text-chalkyBlue">Nexus Cloud</p>
+              </div>
             </div>
-            <div
-              class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3"
-            >
-              <img src="../assets/icons/co-op.svg" />
-              <p class="text-chalkyBlue">Online Co-Op</p>
-            </div>
-            <div
-              class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3"
-            >
-              <img src="../assets/icons/achv.svg" />
-              <p class="text-chalkyBlue">Nexus Achievements</p>
-            </div>
-            <div
-              class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3"
-            >
-              <img src="../assets/icons/controller.svg" />
-              <p class="text-chalkyBlue">Full Controller Support</p>
-            </div>
-            <div
-              class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3"
-            >
-              <img src="../assets/icons/cards.svg" />
-              <p class="text-chalkyBlue">Nexus Trading Cards</p>
-            </div>
-            <div
-              class="flex items-center gap-3 w-full rounded bg-bg-highlight bg-opacity-40 py-2 px-3"
-            >
-              <img src="../assets/icons/cloud.svg" />
-              <p class="text-chalkyBlue">Nexus Cloud</p>
+          </div>
+          <div class="p-6 bg-bg-main rounded-lg h-fit flex flex-col gap-2">
+            <h2 class="text-lg text-text-dim">Languages</h2>
+            <div class="grid grid-cols-4 gap-2">
+              <div class="col-start-2 place-self-center">Interface</div>
+              <div class="col-start-3 place-self-center">Subtitles</div>
+              <div class="col-start-4 place-self-center">Full Audio</div>
+              <div class="grid-cols-subgrid col-span-4 grid bg-bg-highlight p-2 rounded">
+                <div class="col-start-1">English</div>
+                <div class="col-start-2 text-primary place-self-center">✔</div>
+                <div class="col-start-3 text-primary place-self-center">✔</div>
+                <div class="col-start-4 text-primary place-self-center">✔</div>
+              </div>
+              <div class="grid-cols-subgrid col-span-4 grid bg-bg-highlight p-2 rounded">
+                <div class="col-start-1">French</div>
+                <div class="col-start-2 text-primary place-self-center">✔</div>
+                <div class="col-start-3 text-primary place-self-center">✔</div>
+                <div class="col-start-3 text-primary place-self-center"></div>
+              </div>
+              <div class="grid-cols-subgrid col-span-4 grid bg-bg-highlight p-2 rounded">
+                <div class="col-start-1">German</div>
+                <div class="col-start-2 text-primary place-self-center">✔</div>
+                <div class="col-start-3 text-primary place-self-center">✔</div>
+                <div class="col-start-3 text-primary place-self-center"></div>
+              </div>
+              <div class="grid-cols-subgrid col-span-4 grid bg-bg-highlight p-2 rounded">
+                <div class="col-start-1">Spanish</div>
+                <div class="col-start-2 text-primary place-self-center">✔</div>
+                <div class="col-start-3 text-primary place-self-center">✔</div>
+                <div class="col-start-3 text-primary place-self-center"></div>
+              </div>
+              <p class="text-secondary col-span-4 mt-2 cursor-not-allowed">See all 14 supported languages</p>
             </div>
           </div>
         </div>
@@ -283,7 +318,7 @@ const apiKeys = [
   "AIzaSyDsftzASOpt51GZjtI41OzzXvuC7RHTkLE",
   "AIzaSyDbd1ctHxls9OOIFBwjDBVBPk3tqWz7qM8",
   "AIzaSyCCy0BxvgTli0SKmioDHCgmhX9_Smnsc9s",
-  "AIzaSyD_4-T2P10VGVp5YhMO4KRnRMPvF0Ytn9I"
+  "AIzaSyD_4-T2P10VGVp5YhMO4KRnRMPvF0Ytn9I",
 ];
 let apiKeyIndex = 0;
 
@@ -309,7 +344,7 @@ const fetchTrailer = async (title: string) => {
         }
       );
       const video = response.data.items[0];
-      trailerUrl.value = `https://www.youtube.com/embed/${video.id.videoId}?autoplay=1`;
+      trailerUrl.value = `https://www.youtube.com/embed/${video.id.videoId}`;
       localStorage.setItem(`trailerUrl_${gameID.value}`, trailerUrl.value);
     } catch (error: any) {
       if (error.response?.status === 403) {
