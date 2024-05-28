@@ -298,7 +298,9 @@ const fetchGameDetails = async (id: string) => {
 
 const fetchTrailer = async (title: string) => {
   try {
-    const apiKey = "AIzaSyDdYVRD6RKvuGqfP12O1HnPsTi8uMK5aTQ";
+    const apiKeys = ["AIzaSyCCy0BxvgTli0SKmioDHCgmhX9_Smnsc9s", "AIzaSyBDAhAGuH_NlfDY9OsCJAya4fIb9bTyDJs"];
+    const apiKey = apiKeys[Math.floor(Math.random() * apiKeys.length)];
+
     const response = await axios.get(
       `https://www.googleapis.com/youtube/v3/search`,
       {
