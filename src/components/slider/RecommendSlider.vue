@@ -26,7 +26,6 @@
       <swiper-slide
         v-for="item in props.games"
         :key="item.gameID"
-        class="cursor-pointer"
       >
         <div
           class="bg-bg-main rounded-lg p-4 w-full flex flex-col gap-5 justify-between"
@@ -35,13 +34,13 @@
             loading="lazy"
             :src="item.image"
             :alt="item.gameName"
-            class="w-full h-60 object-cover"
+            class="w-full h-60 object-cover cursor-pointer"
             @click="goToGameDetails(item.gameID)"
           />
           <div class="flex flex-col gap-4 w-full">
             <div class="flex justify-between items-center w-full">
               <h3
-                class="font-bold text-text-main text-xl"
+                class="font-bold text-text-main text-xl cursor-pointer"
                 @click="goToGameDetails(item.gameID)"
               >
                 {{ item.gameName }}
@@ -99,7 +98,7 @@ const toggleWishlist = () => {
 
 const goToGameDetails = (gameID: number) => {
   router.push(`/games/${gameID}`).then(() => {
-    gsap.to(window, { scrollTo: { y: 0 }, duration: 1, ease: "power2.inOut" });
+    gsap.to(window, { scrollTo: { y: 0 }, duration: 0.8, ease: "power1.out" });
   });
 };
 </script>
