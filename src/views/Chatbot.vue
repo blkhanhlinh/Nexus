@@ -69,8 +69,10 @@
             <div v-if="!pair.loading && pair.answer" class="w-fit flex gap-2">
               <div
                 class="rounded-bl-xl rounded-e-xl bg-bg-hover px-4 py-2 w-fit float-left mt-3"
-                v-html="formatAnswer(pair.answer)"
-              ></div>
+                id="answer"
+              >
+                <VueShowdown :markdown="pair.answer" />
+              </div>
               <div
                 v-if="pair.audioUrl"
                 @click="toggleAudio(pair)"
@@ -213,7 +215,7 @@ import { useChatStore } from "@/stores/chat.store";
 import Navbar from "@/components/Navbar.vue";
 import gsap from "gsap";
 import Loader from "@/components/Loader.vue";
-import { marked } from "marked";
+import { VueShowdown } from "vue-showdown";
 
 const authStore = useAuthStore();
 const chatStore = useChatStore();
@@ -258,10 +260,6 @@ const stopPulsing = () => {
     gsap.killTweensOf(pulsingElement.value);
     gsap.to(pulsingElement.value, { scale: 1, opacity: 1, duration: 0.2 });
   }
-};
-
-const formatAnswer = (answer: string) => {
-  return marked(answer);
 };
 
 const adjustHeight = () => {
@@ -313,6 +311,7 @@ const handleSendMessage = async () => {
 
   try {
     await chatStore.fetchAnswer(newMessage.question);
+    console.log(chatStore.answer);
     chatHistory.value[queryIndex].answer = chatStore.answer;
     chatHistory.value[queryIndex].loading = false;
     isFetching.value = false;

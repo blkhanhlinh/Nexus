@@ -198,41 +198,43 @@
                 >
                   <div
                     class="rounded-bl-xl rounded-e-xl bg-bg-hover px-4 py-2 w-fit float-left mt-2"
-                    v-html="formatAnswer(pair.answer)"
-                  ></div>
-                  <div
-                    v-if="pair.audioUrl"
-                    @click="toggleAudio(pair)"
-                    class="cursor-pointer rounded-full flex items-center justify-center p-2 h-8 w-8 overflow-hidden mt-2 bg-bg-hover"
+                    id="answer"
                   >
-                    <svg
-                      v-if="!pair.isPlaying"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M16 21C19.527 19.453 21.999 16.091 21.999 12C21.999 7.909 19.527 4.547 16 3V5C18.387 6.386 19.999 9.047 19.999 12C19.999 14.953 18.387 17.614 16 19V21Z"
-                        fill="#F3F3F3"
-                      />
-                      <path
-                        d="M16 6.99997V17C17.225 15.9 18 13.771 18 12C18 10.229 17.225 8.09997 16 6.99997ZM4 17H6.697L12.445 20.832C12.5958 20.9321 12.7708 20.9896 12.9516 20.9984C13.1324 21.0072 13.3122 20.967 13.472 20.882C13.6316 20.7965 13.765 20.6693 13.858 20.514C13.951 20.3587 14.0001 20.181 14 20V3.99997C13.9999 3.81909 13.9508 3.64162 13.8578 3.48646C13.7648 3.3313 13.6315 3.20427 13.472 3.11889C13.3125 3.03351 13.1329 2.99299 12.9522 3.00163C12.7715 3.01027 12.5966 3.06776 12.446 3.16797L6.697 6.99997H4C2.897 6.99997 2 7.89697 2 8.99997V15C2 16.103 2.897 17 4 17ZM4 8.99997H7C7.033 8.99997 7.061 8.98397 7.093 8.98097C7.22601 8.96741 7.35509 8.928 7.473 8.86497C7.499 8.84997 7.53 8.84797 7.555 8.83197L12 5.86797V18.132L7.555 15.168C7.53 15.151 7.499 15.148 7.473 15.135C7.35491 15.0707 7.22491 15.0312 7.091 15.019C7.059 15.016 7.032 15 7 15H4V8.99997Z"
-                        fill="#F3F3F3"
-                      />
-                    </svg>
-                    <svg
-                      v-else
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M6 6H18V18H6V6Z" fill="#F3F3F3" />
-                    </svg>
+                    <VueShowdown :markdown="pair.answer" />
                   </div>
+                </div>
+                <div
+                  v-if="pair.audioUrl"
+                  @click="toggleAudio(pair)"
+                  class="cursor-pointer rounded-full flex items-center justify-center p-2 h-8 w-8 overflow-hidden mt-2 bg-bg-hover"
+                >
+                  <svg
+                    v-if="!pair.isPlaying"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M16 21C19.527 19.453 21.999 16.091 21.999 12C21.999 7.909 19.527 4.547 16 3V5C18.387 6.386 19.999 9.047 19.999 12C19.999 14.953 18.387 17.614 16 19V21Z"
+                      fill="#F3F3F3"
+                    />
+                    <path
+                      d="M16 6.99997V17C17.225 15.9 18 13.771 18 12C18 10.229 17.225 8.09997 16 6.99997ZM4 17H6.697L12.445 20.832C12.5958 20.9321 12.7708 20.9896 12.9516 20.9984C13.1324 21.0072 13.3122 20.967 13.472 20.882C13.6316 20.7965 13.765 20.6693 13.858 20.514C13.951 20.3587 14.0001 20.181 14 20V3.99997C13.9999 3.81909 13.9508 3.64162 13.8578 3.48646C13.7648 3.3313 13.6315 3.20427 13.472 3.11889C13.3125 3.03351 13.1329 2.99299 12.9522 3.00163C12.7715 3.01027 12.5966 3.06776 12.446 3.16797L6.697 6.99997H4C2.897 6.99997 2 7.89697 2 8.99997V15C2 16.103 2.897 17 4 17ZM4 8.99997H7C7.033 8.99997 7.061 8.98397 7.093 8.98097C7.22601 8.96741 7.35509 8.928 7.473 8.86497C7.499 8.84997 7.53 8.84797 7.555 8.83197L12 5.86797V18.132L7.555 15.168C7.53 15.151 7.499 15.148 7.473 15.135C7.35491 15.0707 7.22491 15.0312 7.091 15.019C7.059 15.016 7.032 15 7 15H4V8.99997Z"
+                      fill="#F3F3F3"
+                    />
+                  </svg>
+                  <svg
+                    v-else
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M6 6H18V18H6V6Z" fill="#F3F3F3" />
+                  </svg>
                 </div>
               </div>
             </div>
@@ -306,7 +308,9 @@
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    :class="{ 'opacity-50 cursor-not-allowed': !isAuthenticated }"
+                    :class="{
+                      'opacity-50 cursor-not-allowed': !isAuthenticated,
+                    }"
                     class="cursor-pointer"
                     @click="handleSendMessage"
                   >
@@ -340,9 +344,7 @@
 import { onMounted, ref, computed, nextTick } from "vue";
 import { useAuthStore } from "@/stores";
 import { useChatStore } from "@/stores/chat.store";
-import Navbar from "@/components/Navbar.vue";
-import Loader from "@/components/Loader.vue";
-import { marked } from 'marked';
+import { VueShowdown } from "vue-showdown";
 
 const showChat = ref(false);
 const showGreeting = ref(false);
@@ -383,10 +385,6 @@ onMounted(() => {
     }, 5000);
   }, 3000);
 });
-
-const formatAnswer = (answer: string) => {
-  return marked(answer);
-};
 
 const handleSendMessage = async () => {
   if (message.value.trim() === "") return;
@@ -438,7 +436,7 @@ const fetchAudio = async (text: string, queryIndex: number) => {
       chatHistory.value[queryIndex].isPlaying = false;
     });
   }
-}
+};
 
 // Voice recording and transcription
 const startRecording = () => {
