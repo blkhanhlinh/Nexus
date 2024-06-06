@@ -11,6 +11,7 @@
         height="25"
         viewBox="0 0 25 25"
         fill="none"
+        class="h-4 w-4 lg:h-6 lg:w-6"
       >
         <g clip-path="url(#clip0_1059_1632)">
           <path
@@ -70,8 +71,8 @@ const props = defineProps<{
 
 const buttonClass =
   props.type === "text"
-    ? ` ${props.smaller ? "px-3 py-2" : "px-5 py-4 h-[52px]"}`
-    : "p-2 h-fit w-auto";
+    ? ` ${props.smaller ? "px-3 py-2" : "h-auto py-2 px-3 lg:px-5 lg:py-4 lg:h-[52px]"}`
+    : "p-1 md:p-2 h-fit w-auto";
 </script>
 
 <style scoped></style>

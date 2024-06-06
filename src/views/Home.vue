@@ -5,27 +5,27 @@
         Account has been registered successfully!
       </div>
     </div>
-    <div class="mb-24">
-      <img loading="lazy" class="w-full mb-20" src="../assets/images/home_header_bg.gif" />
-      <div class="flex flex-col gap-20">
+    <div class="mb-16 lg:mb-24">
+      <img loading="lazy" class="lg:h-full h-auto w-max mb-10 lg:mb-20 lg:-mt-0 -mt-[52px]" src="../assets/images/home_header_bg.gif" />
+      <div class="flex flex-col gap-10 lg:gap-20">
         <div class="flex flex-col gap-5">
-          <h1 class="text-xl font-bold uppercase">Featured</h1>
+          <h1 class="text-lg lg:text-xl font-bold uppercase">Featured</h1>
           <featured-slider></featured-slider>
         </div>
         <div class="flex flex-col gap-5">
-          <h1 class="text-xl font-bold uppercase">Category</h1>
+          <h1 class="text-lg lg:text-xl font-bold uppercase">Category</h1>
           <category-slider :pagination="true" :categories="categories"></category-slider>
         </div>
         <div v-if="isAuthenticated" class="flex flex-col gap-5">
-          <h1 class="text-xl font-bold uppercase">Recommend for you</h1>
+          <h1 class="text-lg lg:text-xl font-bold uppercase">Recommend for you</h1>
           <game-slider type="recommend"></game-slider>
         </div>
         <div class="flex flex-col gap-5">
-          <h1 class="text-xl font-bold uppercase">New & Trending</h1>
+          <h1 class="text-lg lg:text-xl font-bold uppercase">New & Trending</h1>
           <game-slider type="new"></game-slider>
         </div>
         <div class="flex flex-col gap-5">
-          <h1 class="text-xl font-bold uppercase">Under $20</h1>
+          <h1 class="text-lg lg:text-xl font-bold uppercase">Under $20</h1>
           <game-slider type="underTwenty"></game-slider>
         </div>
       </div>

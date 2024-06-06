@@ -1,5 +1,5 @@
 <template>
-  <div class="box h-56 w-full relative cursor-pointer" @click="selectCategory">
+  <div class="box h-32 w-32 md:w-40 md:h-40 lg:h-56 lg:w-full relative cursor-pointer" @click="selectCategory">
     <img
       class="rectangle"
       v-if="cate?.startsWith('A')"
@@ -20,9 +20,9 @@
       v-else
       src="../../assets/images/co-op.png"
     />
-    <div class="bg-bg-highlight bg-opacity-50 w-full h-56 absolute z-1"></div>
+    <div class="bg-bg-highlight bg-opacity-50 h-32 w-32 md:w-40 md:h-40 lg:h-56 lg:w-full absolute z-1"></div>
     <span
-      class="font-semibold text-xl absolute self-center text-center flex flex-col w-full h-full justify-center z-10"
+      class="font-semibold lg:text-xl absolute self-center text-center flex flex-col w-full h-full justify-center z-10"
     >{{ cate }}</span>
   </div>
 </template>

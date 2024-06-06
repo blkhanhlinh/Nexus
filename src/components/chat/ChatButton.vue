@@ -1,11 +1,11 @@
 <template>
-  <div class="fixed bottom-8 right-8 flex flex-row items-end gap-4 z-10">
+  <div class="fixed bottom-8 right-3 lg:right-8 flex flex-row items-end gap-4 z-10">
     <div class="flex flex-col-reverse items-end gap-3">
       <div class="flex gap-4">
         <transition name="fade">
           <div
             v-if="showGreeting"
-            class="bg-white text-text-dim p-4 rounded shadow-lg flex items-center space-x-2 z-auto"
+            class="bg-white text-text-dim p-2 lg:p-4 rounded shadow-lg flex items-center lg:space-x-2 space-x-1 z-auto"
           >
             <span>👋</span>
             <span>I'm here to help you.</span>
@@ -13,7 +13,7 @@
         </transition>
         <button
           @click="toggleChat"
-          class="w-fit h-fit bg-blue text-text-main rounded-full p-2 shadow-lg hover:bg-blueHi"
+          class="w-fit h-fit bg-blue text-text-main rounded-full p-1 lg:p-2 shadow-lg hover:bg-blueHi"
         >
           <div class="h-12 w-12 flex justify-center items-center">
             <svg

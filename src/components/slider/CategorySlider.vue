@@ -1,8 +1,8 @@
 <template>
-  <div class="w-full py-5 relative bg-bg-main bg-opacity-20 rounded">
+  <div class="w-full py-5 relative bg-bg-main bg-opacity-20 rounded overflow-hidden">
     <swiper
-      :slidesPerView="1"
-      :spaceBetween="10"
+      :slidesPerView="3"
+      :spaceBetween="30"
       :loop="true"
       :modules="modules"
       :centeredSlides="false"
@@ -10,10 +10,6 @@
       :navigation="true"
       :breakpoints="{
         '640': {
-          slidesPerView: 2,
-          spaceBetween: 20,
-        },
-        '768': {
           slidesPerView: 4,
           spaceBetween: 30,
         },

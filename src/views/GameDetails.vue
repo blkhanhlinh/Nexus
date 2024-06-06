@@ -1,10 +1,10 @@
 <template>
   <layout>
-    <div v-if="game" class="my-8 flex flex-col gap-4">
+    <div v-if="game" class="lg:my-8 flex flex-col gap-4">
       <!-- Game Header -->
-      <div class="flex justify-between items-center p-4 rounded-lg bg-bg-main">
-        <h1 class="font-bold text-3xl">{{ game.title }}</h1>
-        <div class="flex justify-end items-center flex-shrink-0 gap-3">
+      <div class="flex flex-col md:flex-row justify-between items-center p-4 rounded-lg bg-bg-main">
+        <h1 class="font-bold text-xl lg:text-3xl">{{ game.title }}</h1>
+        <div class="hidden lg:flex justify-end items-center flex-shrink-0 gap-3">
           <secondary-button name="Ignore"></secondary-button>
           <secondary-button name="Follow"></secondary-button>
           <icon-button
@@ -17,7 +17,7 @@
         </div>
       </div>
       <!-- Game Thumbnails -->
-      <div class="bg-bg-main h-fit p-6 rounded-lg grid grid-cols-3 gap-x-4">
+      <div class="bg-bg-main h-fit p-6 rounded-lg grid grid-cols-1 lg:grid-cols-3 lg:gap-x-4">
         <div class="col-span-2">
           <div class="swiper-container">
             <swiper
@@ -74,7 +74,7 @@
             <img
               :src="game.url[0]"
               loading="lazy"
-              class="h-48 w-full object-cover"
+              class="h-48 w-full object-cover "
             />
             <p class="">
               {{ game.plotAndGameplay.slice(0, 150).concat("...") }}
@@ -119,8 +119,8 @@
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-3 gap-x-6 gap-y-4">
-        <div class="col-span-2 flex flex-col gap-4">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-6 gap-y-4">
+        <div class="lg:col-span-2 flex flex-col gap-4">
           <div class="p-6 bg-bg-main rounded-lg flex flex-col gap-4">
             <div class="flex items-center justify-between">
               <p class="text-xl font-bold">{{ game.title }}</p>

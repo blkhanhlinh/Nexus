@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full py-5 relative bg-bg-main bg-opacity-20 rounded-lg">
-    <div v-if="loading" class="flex justify-center items-center">
+    <div v-if="loading" class="flex justify-center items-center h-[524px]">
       <loader></loader>
     </div>
     <swiper

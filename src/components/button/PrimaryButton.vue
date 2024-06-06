@@ -1,7 +1,7 @@
 <template>
   <button
     :class="[
-      smaller ? 'px-4 py-2' : 'h-[52px] py-4 px-5',
+      smaller ? 'px-4 py-2' : 'h-fit p-2 lg:h-[52px] lg:py-4 lg:px-5',
       'flex rounded justify-center items-center z-20',
       active ? 'bg-bg-hover' : 'bg-bg-highlight', 
       cart ? 'bg-secondary hover:bg-blue' : 'hover:bg-bg-hover',

@@ -2,30 +2,30 @@
   <div class="w-full py-5 relative bg-bg-main bg-opacity-20 rounded">
     <swiper
       :modules="modules"
-      :slidesPerView="3"
-      :spaceBetween="30"
+      :slidesPerView="1"
+      :spaceBetween="10"
       :centeredSlides="false"
       :pagination="{ clickable: true }"
       :navigation="true"
       :breakpoints="{
         '640': {
-          slidesPerView: 1,
-          spaceBetween: 10,
-        },
-        '768': {
           slidesPerView: 2,
           spaceBetween: 20,
         },
+        '768': {
+          slidesPerView: 2,
+          spaceBetween: 30,
+        },
         '1024': {
           slidesPerView: 3,
-          spaceBetween: 30,
+          spaceBetween: 40,
         },
       }"
       class="mySwiper"
     >
       <swiper-slide
-        v-for="item in props.games"
-        :key="item.gameID"
+        v-for="(item, index) in props.games"
+        :key="index"
       >
         <div
           class="bg-bg-main rounded-lg p-4 w-full flex flex-col gap-5 justify-between"

@@ -27,6 +27,28 @@
   }
 }
 
+$mobile-width: 480px; 
+$tablet-width: 768px; 
+$desktop-width: 1024px;
+
+@mixin mobile {
+  @media (max-width: #{$mobile-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
+
 *,
 *::before,
 *::after {
@@ -45,6 +67,9 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  @include mobile {
+    font-size: 12px;
+  }
 }
 
 blockquote::before,
@@ -79,14 +104,25 @@ textarea {
   outline: none;
 }
 
+.swiper-container,
+.swiper-wrapper {
+  display: inherit;
+}
+
 .mySwiper {
   height: max-content;
   width: 100%;
   padding: 0 1.5rem !important;
+  @include mobile {
+    padding: 0 1rem !important;
+  }
 
   .swiper-pagination {
     position: relative;
     margin-top: 2rem;
+    @include mobile {
+      margin-top: 1rem;
+    }
   }
 
   .swiper-pagination-bullet {
@@ -94,6 +130,10 @@ textarea {
     width: 2.25rem;
     border-radius: 9999px;
     margin: 0 0.5rem;
+    @include mobile {
+      width: 1.25rem;
+      height: 6px;
+    }
   }
 
   .swiper-pagination-bullet-active {
@@ -118,6 +158,12 @@ textarea {
   .swiper-button-next:after {
     font-size: 24px;
     font-weight: 700;
+    @include mobile {
+      font-size: .75rem;
+    }
+    @include tablet {
+      font-size: 1rem;
+    }
   }
 }
 

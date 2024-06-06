@@ -1,8 +1,8 @@
 <template>
-  <div :class="['bg-bg-main rounded-lg p-4 w-full flex gap-5', cardClass]">
+  <div :class="['bg-bg-main rounded-lg p-4 w-full flex gap-3 lg:gap-5', cardClass]">
     <router-link
       :to="`/games/${game.gameId}`"
-      :class="variant === 'rowSlider' ? 'w-4/5' : ''"
+      :class="variant === 'rowSlider' ? 'w-full' : ''"
     >
       <img
         :src="Array.isArray(game.url) ? game.url[0] : game.url"
@@ -19,7 +19,7 @@
     >
       <div class="flex justify-between items-center">
         <router-link :to="`/games/${game.gameId}`">
-          <h3 class="font-bold text-text-main text-xl">{{ game.title }}</h3>
+          <h3 class="font-bold text-text-main lg:text-xl">{{ game.title }}</h3>
         </router-link>
         <icon-button
             @click.prevent="toggleWishlist"
@@ -27,10 +27,10 @@
             :btn-style="wishlistIcon"
           ></icon-button>
       </div>
-      <div class="flex justify-between items-center">
-        <icon-o-s :os="props.game.operatingSystem"></icon-o-s>
+      <div class="flex justify-between sm:items-center items-start">
+        <icon-o-s :os="props.game.operatingSystem" class="mt-2 md:mt-0"></icon-o-s>
         <div class="flex items-center gap-5">
-          <main-cta :price="game.price" :gameId="game.gameId" />
+          <main-cta :price="game.price" :gameId="game.gameId" :is-full="variant === 'rowSlider' && width <= 640" />
         </div>
       </div>
     </div>
@@ -43,6 +43,7 @@ import { Game } from "@/interfaces/Product";
 import IconOS from "../common/IconOS.vue";
 import MainCta from "../button/MainCta.vue";
 import IconButton from "../button/IconButton.vue";
+import { useWindowSize } from "@vueuse/core";
 
 const props = defineProps<{
   game: Game;
@@ -50,11 +51,12 @@ const props = defineProps<{
 }>();
 
 const variant = props.variant || "columnSlider";
+const { width } = useWindowSize();
 
 const cardClass = computed(() => {
   switch (variant) {
     case "rowSlider":
-      return "flex-row";
+      return "flex-row ";
     default:
       return "flex-col";
   }
@@ -63,7 +65,7 @@ const cardClass = computed(() => {
 const imageClass = computed(() => {
   switch (variant) {
     case "rowSlider":
-      return "w-full h-32 object-cover";
+      return "w-full h-full lg:h-32 object-cover";
     default:
       return "w-full h-48 object-cover";
   }

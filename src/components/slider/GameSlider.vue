@@ -10,12 +10,11 @@
           rows: grid.rows,
           fill: grid.fill as 'row' | 'column' | undefined,
         }"
+      :slidesPerView="1"
+      :spaceBetween="30"
       class="mySwiper"
     >
-      <swiper-slide
-        v-for="item in games"
-        :key="item.gameId"
-      >
+      <swiper-slide v-for="item in games" :key="item.gameId">
         <game-card
           :game="item"
           :variant="variant"
@@ -78,10 +77,10 @@ const breakpoints = computed(() => {
   return {
     "640": {
       slidesPerView: props.type === "new" ? 1 : 2,
-      spaceBetween: 20,
+      spaceBetween: 30,
     },
     "768": {
-      slidesPerView: props.type === "new" ? 2 : 3,
+      slidesPerView: props.type === "new" ? 1 : 2,
       spaceBetween: 30,
     },
     "1024": {
@@ -104,7 +103,10 @@ const variant = computed(() => {
 onMounted(() => {
   if (props.type === "recommend" && (gameStore.recommend ?? []).length === 0) {
     gameStore.fetchGamesHome();
-  } else if (props.type === "new" && (gameStore.newAndTrending ?? []).length === 0) {
+  } else if (
+    props.type === "new" &&
+    (gameStore.newAndTrending ?? []).length === 0
+  ) {
     gameStore.fetchGamesHome();
   } else if (
     props.type === "underTwenty" &&
@@ -115,5 +117,4 @@ onMounted(() => {
 });
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
