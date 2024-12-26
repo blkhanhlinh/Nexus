@@ -25,6 +25,10 @@ Nexus is a modern game store platform featuring an AI-powered chatbot to enhance
 Modern landing page showcasing featured games and latest releases.
 ![Home Page](src/assets/images/home.png)
 
+### Login Page
+
+![Login Page](src/assets/images/login.png)
+
 ### Game Store
 
 Browse and filter through our extensive game collection.
