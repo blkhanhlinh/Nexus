@@ -1,4 +1,3 @@
-// stores/chat.store.ts
 import { defineStore } from "pinia";
 import axios from "axios";
 import { baseURL } from "@/constants/api";
